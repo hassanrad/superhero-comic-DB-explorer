@@ -5,6 +5,14 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'Gridsome',
-  plugins: []
+  siteName: 'superhero-comic-DB-explorer',
+  plugins: [ ],
+  templates: {
+    Superhero: [
+      {
+        path: '/superhero/:id',
+        component: './src/templates/SuperheroPage.vue'
+      }
+    ]
+  }
 }

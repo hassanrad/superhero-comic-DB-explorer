@@ -6,11 +6,39 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = function (api) {
-  api.loadSource(({ addCollection }) => {
-    // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
+  api.loadSource(async actions => {
+    const SuperheroData = require('./src/data/superheroData.json');
+
+    const collection = actions.addCollection({
+      typeName: 'Superhero'
+    })
+
+    for (const superhero of SuperheroData) {
+      collection.addNode(superhero);
+    }
   })
 
-  api.createPages(({ createPage }) => {
-    // Use the Pages API here: https://gridsome.org/docs/pages-api/
-  })
+  module.exports = function (api) {
+    api.createPages(async ({ graphql, createPage }) => {
+      const { data } = await graphql(`{
+        allSuperhero {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+      }`)
+  
+      data.allProduct.edges.forEach(({ node }) => {
+        createPage({
+          path: `/superhero/${node.id}`,
+          component: './src/templates/SuperheroPage.vue',
+          context: {
+            id: node.id
+          }
+        })
+      })
+    })
+  }
 }
