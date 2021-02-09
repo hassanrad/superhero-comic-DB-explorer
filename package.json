@@ -1,5 +1,5 @@
 {
-  "name": "superhero-comic-DB-explorer",
+  "name": "superhero-comic-db-explorer",
   "private": true,
   "version": "1.0.0",
   "description": "Superhero Comic Database Explorer",
@@ -11,13 +11,17 @@
   },
   "dependencies": {
     "@gridsome/transformer-json": "^0.2.1",
-    "gridsome": "^0.7.0",
-    "gridsome-source-graphql": "^1.0.2"
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
+    "gridsome": "^0.7.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/vue": "^5.6.1",
-    "jest": "^26.6.3"
+    "eslint": "^7.19.0",
+    "eslint-plugin-gridsome": "^1.6.1",
+    "jest": "^26.6.3",
+    "vue-eslint-parser": "^7.4.1"
   },
   "repository": {
     "type": "git",
