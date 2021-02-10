@@ -9,7 +9,7 @@
         </thead>
         <tbody>
           <tr v-for="edge in $static.allSuperhero.edges" :key="edge.node.id">
-            <td>{{edge.node.name }}</td>
+            <td><a :href="'/superhero/' + edge.node.id">{{edge.node.name}}</a></td>
             <td>{{edge.node.comics.available}}</td>
           </tr>
         </tbody>
