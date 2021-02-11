@@ -1,21 +1,23 @@
 <template>
-  <div>
-    <h1 v-html="$page.superhero.name" />
-    <div v-html="$page.superhero.description" />
-    <table class="comicList">
-        <thead>
-          <tr>
-            <th>Comic Book Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="comic in $page.superhero.comics.items" :key="comic.id">
-            <td>{{comic.name }}</td>
-          </tr>
-        </tbody>
-      </table>
-    <slot/>
-  </div>
+  <Layout>
+    <div>
+      <h3 v-html="$page.superhero.name" />
+      <h6 v-html="$page.superhero.description" />
+      <table class="comicList">
+          <thead>
+            <tr>
+              <th>Comic Book Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="comic in $page.superhero.comics.items" :key="comic.id">
+              <td>{{comic.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      <slot/>
+    </div>
+  </Layout>
 </template>
 
 <page-query>
@@ -36,8 +38,8 @@
 .comicList {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   width: 75%;
   margin-left: auto;
   margin-right: auto;
