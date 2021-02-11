@@ -1,22 +1,106 @@
 <template>
-  <SuperheroList />
+  <div>
+    <table class="superheroList">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Number of Comics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="edge in $page.allSuperhero.edges" :key="edge.node.id">
+          <td><a :href="'/superhero/' + edge.node.id">{{edge.node.name}}</a></td>
+          <td>{{edge.node.comics.available}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <Pager :info="$page.allSuperhero.pageInfo" linkClass="pagerLink" 
+       class="pager"/>
+  </div>
 </template>
 
+<page-query>
+  query ($page: Int) {
+    allSuperhero(perPage: 10, page: $page, sortBy: "name", order: ASC) @paginate {
+      pageInfo {
+      totalPages
+      currentPage
+    }
+      edges {
+        node {
+          id
+          name
+          comics {
+            available
+          }
+        }
+      }
+    }
+  }
+</page-query>
+
 <script>
-import SuperheroList from '~/components/SuperheroList.vue'
+import { Pager } from 'gridsome'
 
 export default {
   metaInfo: {
     title: 'Superhero Comic DB Explorer'
   },
   components: {
-    SuperheroList
+    Pager
   }
 }
 </script>
 
 <style>
-.home-links a {
-  margin-right: 1rem;
-}
+.superheroList {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .superheroList td, .superheroList th {
+    border: 1px solid #ddd;
+    padding: 4px;
+  }
+
+  .superheroList tr:nth-child(even){background-color: #f2f2f2;}
+
+  .superheroList tr:hover {background-color: #ddd;}
+
+  .superheroList th {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .pager {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+  }
+
+  .pagerLink {
+        color: var(--link-color);
+        text-align: center;
+        text-decoration: none;
+        padding: .5rem 1rem;
+  }
+
+  .pagerLink:hover:not(.active) {
+          background-color: var(--bg-content-color);
+          border-radius: 5px;
+          color: var(--link-color);
+  }
+
+  .active {
+    background-color: var(--bg-content-color);
+    border-radius: 5px;
+  }
 </style>
