@@ -1,22 +1,24 @@
 <template>
-  <div>
-    <table class="superheroList">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Number of Comics</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="edge in $page.allSuperhero.edges" :key="edge.node.id">
-          <td><a :href="'/superhero/' + edge.node.id">{{edge.node.name}}</a></td>
-          <td>{{edge.node.comics.available}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <Pager :info="$page.allSuperhero.pageInfo" linkClass="pagerLink" 
-       class="pager"/>
-  </div>
+  <Layout>
+    <div>
+      <table class="superheroList">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Number of Comics</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="edge in $page.allSuperhero.edges" :key="edge.node.id">
+            <td style="width: 75%;"><a :href="'/superhero/' + edge.node.id">{{edge.node.name}}</a></td>
+            <td style="width: 25%;">{{edge.node.comics.available}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <Pager :info="$page.allSuperhero.pageInfo" linkClass="pagerLink" 
+        class="pager"/>
+    </div>
+  </Layout>
 </template>
 
 <page-query>
@@ -40,16 +42,16 @@
 </page-query>
 
 <script>
-import { Pager } from 'gridsome'
+  import { Pager } from 'gridsome'
 
-export default {
-  metaInfo: {
-    title: 'Superhero Comic DB Explorer'
-  },
-  components: {
-    Pager
+  export default {
+    metaInfo: {
+      title: 'Superhero Comic DB Explorer'
+    },
+    components: {
+      Pager
+    }
   }
-}
 </script>
 
 <style>
@@ -57,7 +59,7 @@ export default {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     margin-top: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     width: 75%;
     margin-left: auto;
     margin-right: auto;
